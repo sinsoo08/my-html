@@ -39,36 +39,33 @@
   <div id="user-section"></div>
 
   <script>
-
-    let isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
     const userSection = document.getElementById("user-section");
-    
 
     function renderUserSection() {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
       if (isLoggedIn) {
         userSection.innerHTML = `
-          <button onclick="location.href='프로필.html'">내 프로필</button>
+          <button onclick="goToProfile()">내 프로필</button>
         `;
       } else {
         userSection.innerHTML = `
-          <button onclick="location.href='로그인.html'">로그인</button>
+          <button onclick="goToLogin()">로그인</button>
         `;
       }
     }
 
-    function login() {
-      alert("로그인 성공!");
-      isLoggedIn = true;
-      localStorage.setItem("isLoggedIn", "true");
-      renderUserSection();
+    function goToLogin() {
+      // 로그인 페이지로 이동
+      window.location.href = '로그인.html';
     }
 
     function goToProfile() {
-      alert("프로필 페이지로 이동합니다.");
+      // 프로필 페이지로 이동
       window.location.href = '프로필.html';
     }
 
+    // 페이지 로딩 시 실행
     renderUserSection();
   </script>
 </body>
