@@ -1,19 +1,26 @@
-const params = new URLSearchParams(window.location.search);
-const username = params.get('username');
+document.addEventListener('DOMContentLoaded', function () {
+  const myPosts = document.getElementById('my-posts');
+  const username = localStorage.getItem('username');
 
-document.getElementById('title').innerText = `${username}님의 블로그`;
+  if (!username) {
+    myPosts.innerHTML = "<p>로그인이 필요합니다.</p>";
+    return;
+  }
 
-fetch(`/api/user/${username}/posts`)  // 해당 유저 글만 가져오기
-  .then(res => res.json())
-  .then(posts => {
-    const list = document.getElementById('userPosts');
-    posts.forEach(post => {
+  const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+  const userPosts = posts.filter(post => post.username === username);
+
+  if (userPosts.length === 0) {
+    myPosts.innerHTML = "<p>작성한 글이 없습니다.</p>";
+  } else {
+    userPosts.reverse().forEach(post => {
       const div = document.createElement('div');
       div.innerHTML = `
         <h3>${post.title}</h3>
         <p>${post.content}</p>
         <hr>
       `;
-      list.appendChild(div);
+      myPosts.appendChild(div);
     });
-  });
+  }
+});
