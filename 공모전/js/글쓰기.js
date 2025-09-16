@@ -15,7 +15,7 @@ document.getElementById('writeForm').addEventListener('submit', function(e) {
   .then(res => {
     if (res.ok) {
       alert('글이 등록되었습니다.');
-      window.location.href = 'index.html';
+      window.location.href = '진짜.html';
     } else {
       alert('글 작성 실패');
     }
