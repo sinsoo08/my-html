@@ -39,12 +39,16 @@
                 alertBox.style.display = "none";
             }, 3000);
         }
+
         function login() {
             const id = document.getElementById("idInput").value;
             const pw = document.getElementById("passwordInput").value;
 
             if (id && pw) {
                 localStorage.setItem("isLoggedIn", "true");
+
+                localStorage.setItem("username", id);
+
                 showAlert("로그인이 되었습니다!");
 
                 setTimeout(() => {
